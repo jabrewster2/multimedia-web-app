@@ -1,0 +1,75 @@
+.card {
+  width: 220px;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #000000;
+  box-shadow: 0 8px 24px rgba(15, 128, 143, 0.12);
+}
+
+.card__image-wrap {
+  overflow: hidden;
+  background: #e2e8f0;
+}
+
+/* Fill the shaped box. Crop if needed so every card in a row matches. */
+.card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Landscape — games */
+.card--game .card__image-wrap {
+  aspect-ratio: 16 / 9;
+}
+
+/* Tall poster — movies */
+.card--movie .card__image-wrap {
+  aspect-ratio: 2 / 3;
+}
+
+/* Square — songs */
+.card--song .card__image-wrap {
+  aspect-ratio: 1 / 1;
+}
+
+.card__body {
+  padding: 12px 14px 16px;
+}
+
+.card__name {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: rgba(0, 162, 255, 0.479);
+}
+
+.card__description {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 24px;
+  align-items: flex-start;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(23, 201, 224, 0.12);
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: rgb(0, 0, 0);
+}
+
+.media-section__header {
+  color: #fff;
+}
