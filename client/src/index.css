@@ -71,5 +71,6 @@ body {
 }
 
 .media-section__header {
+  margin: 0 24px 0px;
   color: #fff;
 }

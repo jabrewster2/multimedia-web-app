@@ -1,4 +1,5 @@
 import Card from "./Card.jsx";
+import FavoriteMovies from "./TMBDCall.jsx";
 
 function App() {
   return (
@@ -32,32 +33,7 @@ function App() {
         <div className="media-section__header">
           <h2>Your Top Movies:</h2>
         </div>
-        <section className="card-row">
-          <Card
-            variant="movie"
-            image="/Movies/perfectBluePoster.jpg"
-            name="Perfect Blue"
-            description="A psychological thriller film directed by Satoshi Kon."
-          />
-          <Card
-            variant="movie"
-            image="/Movies/Pulp_Fiction_(1994)_poster.jpg"
-            name="Pulp Fiction"
-            description="A crime drama film directed by Quentin Tarantino."
-          />
-          <Card
-            variant="movie"
-            image="/Movies/theBatmanPoster.jpg"
-            name="The Batman"
-            description="A superhero film directed by Matt Reeves."
-          />
-          <Card
-            variant="movie"
-            image="/Movies/TheLighthousePoster.jpg"
-            name="The Lighthouse"
-            description="A psychological horror film directed by Robert Eggers."
-          />
-        </section>
+        <FavoriteMovies />
         {/*This is the music poster row*/}
         <div className="media-section__header">
           <h2>Your Top Albums:</h2>
@@ -83,6 +59,8 @@ function App() {
           />
         </section>
       </section>
+
+      <FavoriteMovies />
     </>
   );
 }
