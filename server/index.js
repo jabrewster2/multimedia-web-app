@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 
 app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
@@ -56,6 +56,49 @@ app.get("/api/movies/favorites", async (req, res) => {
     res
       .status(502)
       .json({ error: "favorites lookup failed", details: error.message });
+  }
+});
+
+app.get("/api/games/recentlylayed", async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+
+  try {
+    const url = new URL(
+      `https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/`,
+    );
+    url.searchParams.append("key", process.env.STEAM_API_KEY);
+    url.searchParams.append("steamid", process.env.STEAM_USER_ID);
+    url.searchParams.append("format", "json");
+
+    console.log("Steam API request URL:", url.toString());
+
+    const upstream = await fetch(url);
+
+    const data = await upstream.json();
+    if (!upstream.ok) {
+      return res
+        .status(upstream.status)
+        .json({ error: "recently played games lookup failed", details: data });
+    }
+
+    const games = (data.response?.games ?? []).map((game) => ({
+      id: game.appid,
+      name: game.name,
+      image_url: game.img_icon_url
+        ? `https://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`
+        : null,
+      description: game.last_played
+        ? `Last played: ${new Date(game.last_played * 1000).toLocaleDateString()}`
+        : "Never played",
+    }));
+
+    res.json({ games });
+  } catch (error) {
+    console.error(error);
+    res.status(502).json({
+      error: "recently played games lookup failed",
+      details: error.message,
+    });
   }
 });
 

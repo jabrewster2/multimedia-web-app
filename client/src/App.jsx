@@ -1,5 +1,6 @@
 import Card from "./Card.jsx";
 import FavoriteMovies from "./TMBDCall.jsx";
+import RecentlyPlayedGames from "./SteamCall.jsx";
 
 function App() {
   return (
@@ -60,7 +61,7 @@ function App() {
         </section>
       </section>
 
-      <FavoriteMovies />
+      <RecentlyPlayedGames />
     </>
   );
 }
